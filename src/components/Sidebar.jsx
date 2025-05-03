@@ -14,7 +14,7 @@ const Sidebar = () => {
 	const navigate = useNavigate();
 
 	const { isOpen, handleClose } = useContext(SidebarContext);
-	const { cart, itemAmount, total } = useContext(CartContext);
+	const { cart, itemAmount, total, clearCart } = useContext(CartContext);
 	const { currencySymbol } = useContext(CurrencyContext);
 
 	const handleCheckout = () => {
@@ -59,7 +59,7 @@ const Sidebar = () => {
 					</div>
 					{/* clear cart icon */}
 					<div
-						onClick={() => {}}
+						onClick={clearCart} 
 						className="clear-cart-btn cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
 					>
 						<FiTrash2 />

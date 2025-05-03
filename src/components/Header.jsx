@@ -6,6 +6,7 @@ import Logo from "../assets/img/logo.svg";
 import { BsBag } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { useAuth } from "../contexts/AuthContext"; // Import the auth context
+import { SidebarContext } from "../contexts/SidebarContext.jsx";
 
 const Header = () => {
 	// header state
@@ -13,9 +14,10 @@ const Header = () => {
 	const { itemAmount } = useContext(CartContext);
 	const { currentUser, logout } = useAuth(); // Add authentication context
 	const navigate = useNavigate(); // Add navigation hook
+	const { isOpen, setIsOpen } = useContext(SidebarContext);
 
 	// currency state
-	const { currency } = useContext(CurrencyContext);
+	const { currency, setCurrency } = useContext(CurrencyContext);
 
 	// event listener
 	useEffect(() => {
@@ -64,7 +66,7 @@ const Header = () => {
 					{/* currency select */}
 					<select
 						value={currency}
-						onChange={() => {}}
+						onChange={(e) => setCurrency(e.target.value)}
 						className="border border-slate-800 rounded-md px-3 py-2 focus:outline-none text-slate-800 text-sm"
 						aria-label="Select currency"
 					>
@@ -75,7 +77,7 @@ const Header = () => {
 
 					{/* cart */}
 					<div
-						onClick={() => {}}
+						onClick={() => setIsOpen(true)} // From SidebarContext
 						className="cart-btn cursor-pointer flex relative"
 						role="button"
 						aria-label="cart"
